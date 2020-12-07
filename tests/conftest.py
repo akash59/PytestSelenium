@@ -1,9 +1,10 @@
 import json
-import os
 
 import pytest
 import selenium.webdriver
-
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 @pytest.fixture(scope='session')
 def config():
@@ -13,7 +14,7 @@ def config():
         config = json.load(config_file)
 
     # Assert values are acceptable
-    assert config['browser'] in ['Firefox', 'Chrome', 'Headless Chrome']
+    assert config['browser'] in ['Firefox', 'Chrome', 'Headless Chrome', 'Edge']
     assert isinstance(config['implicit_wait'], int)
     assert config['implicit_wait'] > 0
 
@@ -25,18 +26,18 @@ def config():
 def browser(config):
     # initialize the chromedriver instance
     if config['browser'] == 'Firefox':
-        ff_options = selenium.webdriver.FirefoxOptions()
-        ff_options.binary_location = os.environ['FIREFOX_EXECUTABLE_PATH']
-        browser = selenium.webdriver.Firefox(options=ff_options, executable_path=os.environ['FIREFOX_BINARY_PATH'])
+        browser = selenium.webdriver.Firefox(executable_path=GeckoDriverManager().install())
 
     elif config['browser'] == 'Chrome':
-        chrome_options = selenium.webdriver.ChromeOptions()
-        browser = selenium.webdriver.Chrome(options=chrome_options, executable_path=os.environ['CHROME_BINARY_PATH'])
+        browser = selenium.webdriver.Chrome(executable_path=ChromeDriverManager().install())
+
+    elif config['browser'] == 'Edge':
+        browser = selenium.webdriver.Edge(EdgeChromiumDriverManager().install())
 
     elif config['browser'] == 'Headless Chrome':
         chrome_options = selenium.webdriver.ChromeOptions()
         chrome_options.add_argument('headless')
-        browser = selenium.webdriver.Chrome(options=chrome_options, executable_path=os.environ['CHROME_BINARY_PATH'])
+        browser = selenium.webdriver.Chrome(options=chrome_options, executable_path=ChromeDriverManager().install())
     else:
         raise Exception(f'Browser "{config["browser"]}" is not supported')
 

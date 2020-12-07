@@ -12,6 +12,7 @@ selenium = "*"
 pytest-xdist = "*"
 pytest-html = "*"
 python-dotenv = "*"
+webdriver-manager = "*"
 
 [requires]
 python_version = "3.9"
