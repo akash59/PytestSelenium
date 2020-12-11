@@ -1,0 +1,12 @@
+def change(a):
+    b = [x * 2 for x in a]
+    print(b)
+
+
+def change(a):
+    b = [x * x for x in a]
+    print(b)
+
+
+
+

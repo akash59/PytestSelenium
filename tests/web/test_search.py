@@ -8,9 +8,9 @@ from pages.search import DuckDuckGoSearchPage
 
 
 @pytest.mark.parametrize('phrase', ['panda', 'covid', 'python', 'pytest'])
-def test_basic_duckduckgo_search(browser, phrase):
-    search_page = DuckDuckGoSearchPage(browser)
-    result_page = DuckDuckGoResultPage(browser)
+def test_basic_duckduckgo_search(driver, phrase):
+    search_page = DuckDuckGoSearchPage(driver)
+    result_page = DuckDuckGoResultPage(driver)
     # phrase = "panda"
 
     # Given the DuckDuckGo home page is displayed

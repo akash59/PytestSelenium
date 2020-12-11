@@ -6,6 +6,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
+
 @pytest.fixture(scope='session')
 def config():
     # Read the file
@@ -23,7 +24,7 @@ def config():
 
 
 @pytest.fixture()
-def browser(config):
+def driver(config):
     # initialize the chromedriver instance
     if config['browser'] == 'Firefox':
         browser = selenium.webdriver.Firefox(executable_path=GeckoDriverManager().install())
