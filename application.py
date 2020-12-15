@@ -30,3 +30,56 @@ def fill_list(my_list, list_length, low, high):
 fill_list([], 5, 0, 10)
 print(random.__name__)
 
+
+def gen():
+    L = []
+    for i in range(1000000):
+        L.append(i * i)
+    return L
+
+
+def gen_new():
+    for i in range(10):
+        yield i * i
+
+
+values = gen_new()
+x = [x for x in values]
+print(x)
+
+
+def count_words(my_str):
+    words = my_str.split(" ")
+    for word in words:
+        if word == "Geeks":
+            yield word
+
+
+count = 0
+ss = "Geeks for Geeks is an awesome website. I love Geeks for Geeks"
+result = count_words(ss)
+for i in result:
+    count += 1
+print(count)
+
+
+# Python program to illustrate functions
+# can be passed as arguments to other functions
+def shout(text):
+    return text.upper()
+
+
+def whisper(text):
+    return text.lower()
+
+
+def greet(func):
+    # storing the function in a variable
+    greeting = func("""Hi, I am created by a function 
+                    passed as an argument.""")
+    print(greeting)
+
+
+greet(shout)
+greet(whisper)
+
