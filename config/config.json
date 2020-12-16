@@ -1,4 +1,1 @@
-{
-  "browser": "Headless Chrome",
-  "implicit_wait": 10
-}
+{"browser": "Chrome", "implicit_wait": 10, "explicit_wait": 20}

@@ -7,19 +7,20 @@ import logging.config
 
 from pages.result import DuckDuckGoResultPage
 from pages.search import DuckDuckGoSearchPage
+from tests.web.test_base import BaseTest
 
 
 @pytest.mark.web
-class TestSearch:
+class TestSearch(BaseTest):
 
     LOGGER = logging.getLogger(__name__)
 
     @pytest.mark.parametrize('phrase', ['panda', 'covid', 'python', 'pytest'])
-    def test_basic_duckduckgo_search(self, driver, phrase):
+    def test_basic_duckduckgo_search(self, phrase):
 
         self.LOGGER.info("Inside Test")
-        search_page = DuckDuckGoSearchPage(driver)
-        result_page = DuckDuckGoResultPage(driver)
+        search_page = DuckDuckGoSearchPage(self.driver)
+        result_page = DuckDuckGoResultPage(self.driver)
         # phrase = "panda"
 
         # Given the DuckDuckGo home page is displayed
